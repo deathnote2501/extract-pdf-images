@@ -6,7 +6,7 @@ import base64
 from PIL import Image
 
 # Define the password
-PASSWORD = "jeromeIA"
+PASSWORD = st.secrets["PASSWORD"]
 
 def extract_images_from_pdf(file):
     images = []
