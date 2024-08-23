@@ -13,11 +13,16 @@ def extract_images_from_pdf(file):
     with pdfplumber.open(file) as pdf:
         for i, page in enumerate(pdf.pages):
             for img in page.images:
-                # Extract the image data
-                image = page.within_bbox((img['x0'], img['top'], img['x1'], img['bottom'])).to_image()
-                # Convert the image to a PIL image object
-                pil_image = Image.open(io.BytesIO(image.original))
-                images.append((pil_image, f"page_{i+1}.png"))
+                # Extract the image object using the object ID
+                image_data = page.extract_image(img['object_id'])
+                if image_data:
+                    # Get the image bytes and format
+                    img_bytes = image_data['image']
+                    img_ext = image_data['format']
+                    
+                    # Convert the bytes into a PIL image
+                    pil_image = Image.open(io.BytesIO(img_bytes))
+                    images.append((pil_image, f"page_{i+1}.{img_ext}"))
     return images
 
 def save_images(images):
