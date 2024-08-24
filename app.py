@@ -65,7 +65,10 @@ def main():
                     st.warning("Aucune image trouvée dans le PDF.")
         
         st.write("")
-        st.write("© 2024 Jérome Iavarone - jerome.iavarone@gmail.com")
+        st.write("")
+        st.write("")
+        st.markdown("<p style='text-align: center;'>© 2024 Jérome IAvarone - jerome.iavarone@gmail.com</p>", unsafe_allow_html=True)
+
     elif password:
         st.error("Mot de passe incorrect")
 
